@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "WEBSITE_SLOT_NAME": "Production",
+    "FUNCTIONS_EXTENSION_VERSION": "~1",
+    "ScmType": "None",
+    "bSmartHub_events_IOTHUB": "Endpoint=sb://ihsuprodblres069dednamespace.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=+1yOExKzXPZ89wGqZcb6G9/SJR7AYH5/wGfK0DhIzjg=;EntityPath=iothub-ehub-bsmarthub-505755-9ca439e97a",
+    "WEBSITE_AUTH_ENABLED": "False",
+    "TwilioAccountSid": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "3636fd68-ffcc-4199-a331-127903e5700e",
+    "TwilioAuthToken": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "AzureWebJobsDashboard": "DefaultEndpointsProtocol=https;AccountName=bsmartstorage;AccountKey=Dhv/pDxMzJPpq7BemW5jw8Wgjg4q4tkPrjMNUswXO1X3bqGAv+hIpq/te09hhNKCzziWXa7BJhQz26B4KZCcIA==",
+    "WEBSITE_NODE_DEFAULT_VERSION": "6.5.0",
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "DefaultEndpointsProtocol=https;AccountName=bsmartstorage;AccountKey=Dhv/pDxMzJPpq7BemW5jw8Wgjg4q4tkPrjMNUswXO1X3bqGAv+hIpq/te09hhNKCzziWXa7BJhQz26B4KZCcIA==",
+    "WEBSITE_CONTENTSHARE": "bsmartbrainapp8caf",
+    "WEBSITE_SITE_NAME": "bSmartBrainApp",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=bsmartstorage;AccountKey=Dhv/pDxMzJPpq7BemW5jw8Wgjg4q4tkPrjMNUswXO1X3bqGAv+hIpq/te09hhNKCzziWXa7BJhQz26B4KZCcIA=="
+  }
+}

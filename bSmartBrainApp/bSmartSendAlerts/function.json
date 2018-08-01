@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "type": "twilioSms",
+      "name": "smsmessage",
+      "accountSid": "TwilioAccountSid",
+      "authToken": "TwilioAuthToken",
+      "to": "+1222222222",
+      "from": "+12222222222",
+      "body": "Hi There",
+      "direction": "out"
+    },
+    {
+      "type": "queueTrigger",
+      "name": "alertMessage",
+      "queueName": "alerts-queue",
+      "connection": "AzureWebJobsStorage",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "myIoTHubMessage",
+      "direction": "in",
+      "path": "iothub-ehub-bsmarthub-505755-9ca439e97a",
+      "connection": "bSmartHub_events_IOTHUB",
+      "consumerGroup": "$Default"
+    }
+  ],
+  "disabled": false
+}
