@@ -12,21 +12,19 @@ Typically a Type 1 Diabetic's BG goes up when they eat food and their BG comes d
 The system I developed tries to integrate data from two devices namely an **insulin pump** and a **continuous glucose monitor (CGM)** every 5 minutes and uses the insulin intake and BG data to **predict what the BG levels will be in the next 2 hours**. If the predicted BG is too high then an SMS text message is sent to the care giver suggesting an insulin dose and if the predicted BG is too low then a text message is sent suggesting low treatment to the care giver. This system could be expanded to integrate other information like activity, heart rate and ambient temperature all of which have an impact on the BG levels.
 
 ## How I built it
-Data from the medtronic insulin pump and CGM is read using a third party android app which stores the data in a mongoDB. I wrote a python script to read the mongoDB every 2 mins and extract the data and send it to the Azure IoT Hub. An Azure function listens to the Azure IoT Event Hub and stores the data in an Azure SQL Database. Every 10 mins another Azure function reads all the data in the Azure SQL server and executes a stored procedure to create the BG forecast. If the predicted BG is too high or low the Azure function triggers another Azure Function which in turn sends a text message via Twilio service. Bulk of my time was spent in building the prediction engine which is currently rules based but could be expanded to leverage machine learning.
+Data from the insulin pump and CGM is read using a third party android app which stores the data in a mongoDB. I wrote a python script to read the mongoDB every 2 mins and extract the data and send it to the Azure IoT Hub. An Azure function listens to the Azure IoT Event Hub and stores the data in an Azure SQL Database. Every 10 mins another Azure function reads all the data in the Azure SQL server and executes a stored procedure to create the BG forecast. If the predicted BG is too high or low the Azure function triggers another Azure Function which in turn sends a text message via Twilio service. Bulk of my time was spent in building the prediction engine which is currently rules based but could be expanded to leverage machine learning.
 
-## Challenges I ran into
-* Initially I wanted to develop the python script to run on a raspberry pi and connect to the insulin pump directly but realized it was too much of a technical challenge to deal with. Hence I resorted to using a third party app and also used my laptop instead of the raspberry pi to run the python script.
-* The prediction engine needed to be tuned to my daughter's numbers to enable it to make sensible predictions. To make the system more universally usable we need to replace the current rules based engine to a Machine Learning driven algorithm.
-* The text messages were initially schedule to run every 5 minutes which ended up annoying my wife who was one of the recipients of the messages, hence I had to reduce it to every 10 minutes.
 
-## Accomplishments that I'm proud of
-This is the first time I have been able to analyze my daughter's numbers in real-time and take corrective action based on the numbers. Lot of people rely on rules or gut feeling while managing their kids Type 1 Diabetes. I believe this system has the potential of making lives easy and protect kids with Type 1 diabetes from the harmful effects of sustained out-of-range BG levels. Since this system relies on text messaging to communicate the treatment plan it can help non-technical care givers.
-
-## What I learned
-Predicting accurately is a herculean task. It requires a trial and error approach to get the algorithm right. Always err on the side of safety when predictions are related to healthcare. 
-It's a fine balance between sending alerts when most needed and avoiding annoying the person we need to alert. Again trial and error approach helps to get the optimal level of alerting. 
-
-## What's next for bSmart Smart Diabetes Management System
-1. Create an app to read the data from insulin pump and fitness monitor and send it directly to Azure IoT hub
-2. Change the prediction engine to use Machine learning to make it more universally usable by people of all ages.
-3. Launch a Beta version for potential customers to start using it.
+## Testing Instructions
+1. Setup the Azure IoT Hub, Azure Storage Account and Storage Queue, Azure Function App using the ARM Templates
+2. Create an IOT device in Azure IoT Hub 
+3. Setup the Azure functions in the Function App using the bSmartBrainApp Function Scripts
+4. Make the function bSmartIoTHubDataCapture trigger on an event from the Azure IoT hub you just created
+5. Setup a Twilio account and buy a phone number and register a designated phone number to get the text messages.
+6. Change the bSmartSendAlerts Function to have the Twilio secret key
+7. Change the bSmartAnalyzeData function trigger every 10 mins and also set the target phone number to the number you registered in Twilio
+8. Change the python script to have the device key to the Azure IoT hub.
+9. Create the database with ARM template and the DB objects using the database script.
+10. Change the Function App DB connection to point to the SQL server created in the above steps
+11. Place the python script and the bsmart_test_data_4.csv in the same directory and run the python script. 
+PS. I more easier deployment script will be posted soon which won't require all these manual steps.
